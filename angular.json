@@ -57,11 +57,13 @@
               "extractLicenses": false,
               "sourceMap": true
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "portafolio:build"
+          },
           "configurations": {
             "production": {
               "buildTarget": "portafolio:build:production"
@@ -69,11 +71,13 @@
             "development": {
               "buildTarget": "portafolio:build:development"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n"
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "portafolio:build"
+          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
