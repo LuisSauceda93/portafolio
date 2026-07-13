@@ -1,4 +1,4 @@
-# Portafolio de Luis Sauceda
+# Portafolio
 
 Portafolio personal desarrollado con Angular para mostrar mi perfil como Full-Stack Developer, proyectos destacados, experiencia técnica y canales de contacto para reclutadores y clientes.
 
