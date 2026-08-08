@@ -86,7 +86,12 @@
       }
     </div>
 
-    <a class="btn btn-primary drawer-cta" href="#contacto" (click)="closeMobileMenu()">Descargar CV</a>
+    <a
+      class="btn btn-primary drawer-cta"
+      href="/CV_Luis_Sauceda.pdf"
+      download="CV_Luis_Sauceda.pdf"
+      (click)="closeMobileMenu()"
+    >Descargar CV</a>
   </aside>
 
   <section id="inicio" class="hero">
@@ -104,8 +109,10 @@
 
       <div class="hero-actions">
         <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
-        <a class="btn btn-secondary" href="#contacto">Descargar CV</a>
-        <a class="btn btn-ghost" href="mailto:tu-correo@dominio.com">Contactar</a>
+        <a class="btn btn-secondary" href="/CV_Luis_Sauceda.pdf" download="CV_Luis_Sauceda.pdf">
+          Descargar CV
+        </a>
+        <a class="btn btn-ghost" href="mailto:luigalberto9380@gmail.com">Contactar</a>
       </div>
 
       <div class="metrics">
@@ -124,9 +131,10 @@
         <div class="portrait">
           <img
             class="portrait-image"
-            src="images/profile.jpg"
+            src="/images/profile.jpg"
             alt="Retrato de Luis Sauceda"
             loading="eager"
+            decoding="sync"
           >
         </div>
 
@@ -198,6 +206,34 @@
           </div>
         </article>
       }
+    </div>
+
+    <div class="learning-panel">
+      <div class="learning-heading">
+        <div>
+          <p>En desarrollo</p>
+          <h3>Actualmente aprendiendo y fortaleciendo</h3>
+        </div>
+        <span class="learning-status">Aprendizaje continuo</span>
+      </div>
+
+      <div class="learning-grid">
+        @for (item of learningItems; track item.name) {
+          <article class="learning-card" [style.--tone]="item.tone">
+            <span class="learning-icon" aria-hidden="true">
+              @if (item.icon) {
+                <img [src]="item.icon" [alt]="item.name" loading="lazy">
+              } @else {
+                <span>{{ item.badge }}</span>
+              }
+            </span>
+            <span class="learning-copy">
+              <strong>{{ item.name }}</strong>
+              <span>{{ item.description }}</span>
+            </span>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
@@ -302,7 +338,7 @@
   <section id="experiencia" class="experience">
     <div class="section-heading">
       <p>Experiencia</p>
-      <h2>Recorrido orientado a sistemas empresariales, datos y automatización</h2>
+      <h2>Más de 8 años creando soluciones web, móviles y empresariales</h2>
     </div>
 
     <div class="timeline">
@@ -333,8 +369,8 @@
     </div>
 
     <div class="contact-actions">
-      <a class="btn btn-primary" href="mailto:tu-correo@dominio.com">Escríbeme</a>
-      <a class="btn btn-secondary" href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noreferrer">
+      <a class="btn btn-primary" href="mailto:luigalberto9380@gmail.com">Escríbeme</a>
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/luissauceda" target="_blank" rel="noreferrer">
         LinkedIn
       </a>
     </div>

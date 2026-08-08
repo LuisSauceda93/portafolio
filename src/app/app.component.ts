@@ -31,6 +31,14 @@ type TechGroup = {
   items: TechItem[];
 };
 
+type LearningItem = {
+  name: string;
+  description: string;
+  icon?: string;
+  badge?: string;
+  tone: string;
+};
+
 type Project = {
   title: string;
   role: string;
@@ -135,6 +143,39 @@ export class AppComponent {
     }
   ];
 
+  readonly learningItems: LearningItem[] = [
+    {
+      name: 'Spring Boot',
+      description: 'Desarrollo de APIs y servicios con Java.',
+      icon: 'images/stack-icons/spring.svg',
+      tone: '#6db33f'
+    },
+    {
+      name: 'Docker',
+      description: 'Contenedores y entornos reproducibles.',
+      icon: 'images/stack-icons/docker.svg',
+      tone: '#2496ed'
+    },
+    {
+      name: 'AWS',
+      description: 'Servicios cloud y despliegues en la nube.',
+      icon: 'images/stack-icons/amazonwebservices.svg',
+      tone: '#ff9900'
+    },
+    {
+      name: 'GitHub Actions',
+      description: 'Automatización de pruebas y despliegues.',
+      icon: 'images/stack-icons/githubactions.svg',
+      tone: '#2088ff'
+    },
+    {
+      name: 'Inglés',
+      description: 'Práctica continua para comunicación profesional.',
+      badge: 'EN',
+      tone: '#a78bfa'
+    }
+  ];
+
   readonly projects: Project[] = [
     {
       title: 'GastoTrack',
@@ -173,28 +214,36 @@ export class AppComponent {
 
   readonly career: CareerItem[] = [
     {
-      period: '2022 - Presente',
-      title: 'Full-Stack Developer',
-      company: 'Productos y sistemas empresariales',
+      period: '10/2017 - Actualidad',
+      title: 'Ingeniero Desarrollador de Software / Coordinador de TI',
+      company: 'Lapisa · La Piedad, Michoacán',
       description:
-        'Diseño e implementación de soluciones web, móviles e integraciones con ERPs.',
-      points: ['APIs REST', 'Automatización de procesos', 'Soporte a equipos internos']
+        'Desarrollo y mantenimiento de soluciones web, móviles e integraciones para procesos empresariales.',
+      points: ['Angular + Ionic', 'APIs REST + Epicor', 'Bases de datos SQL', 'Coordinación de TI']
     },
     {
-      period: '2019 - 2022',
-      title: 'Desarrollador Web',
-      company: 'Plataformas de operación',
+      period: '02/2017 - 10/2017',
+      title: 'Ingeniero Desarrollador de Software',
+      company: 'Nu3 · La Piedad, Michoacán',
       description:
-        'Construcción de módulos administrativos, dashboards y sistemas de control.',
-      points: ['Angular + Laravel', 'Modelado de datos', 'Optimización de flujos']
+        'Participación en el ciclo completo de desarrollo y soporte de soluciones web orientadas al negocio.',
+      points: ['Análisis y diseño', 'Desarrollo web', 'Pruebas y mantenimiento']
     },
     {
-      period: '2017 - 2019',
-      title: 'Analista / Desarrollador',
-      company: 'Sistemas a medida',
+      period: '05/2016 - 12/2016',
+      title: 'Ingeniero Analista de Software (Web · Mobile · UX)',
+      company: 'Glouu Technologies · La Piedad, Michoacán',
       description:
-        'Participación en levantamiento de requerimientos, desarrollo y mantenimiento.',
-      points: ['Entrega iterativa', 'Documentación técnica', 'Acompañamiento a usuarios']
+        'Desarrollo de aplicaciones web y móviles con enfoque en usabilidad y experiencia de usuario.',
+      points: ['Interfaces web y mobile', 'Análisis de requerimientos', 'Pruebas funcionales']
+    },
+    {
+      period: '01/2016 - 04/2016',
+      title: 'Residente profesional',
+      company: 'IkonLAB Laboratorio de Diseño · Santiago de Querétaro',
+      description:
+        'Participación en proyectos de desarrollo de software durante la residencia profesional.',
+      points: ['Análisis', 'Construcción de funcionalidades', 'Pruebas']
     }
   ];
 

@@ -521,7 +521,9 @@
   height: 100%;
   object-fit: cover;
   object-position: center 16%;
-  transform: scale(1.04);
+  transform: translateZ(0) scale(1.04);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   filter: contrast(1.02) saturate(0.92);
 }
 
@@ -711,6 +713,111 @@
   color: rgba(226, 232, 240, 0.94);
   font-size: 0.95rem;
   line-height: 1.2;
+}
+
+.learning-panel {
+  margin-top: 18px;
+  padding: 20px;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(15, 23, 42, 0.32) 52%),
+    rgba(15, 23, 42, 0.28);
+}
+
+.learning-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.learning-heading p {
+  margin: 0 0 6px;
+  color: #60a5fa;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.learning-heading h3 {
+  margin: 0;
+  font-size: 1.18rem;
+  letter-spacing: -0.02em;
+}
+
+.learning-status {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border: 1px solid rgba(96, 165, 250, 0.22);
+  border-radius: 999px;
+  color: rgba(191, 219, 254, 0.9);
+  background: rgba(37, 99, 235, 0.14);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.learning-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 16px;
+  background: rgba(2, 6, 23, 0.26);
+}
+
+.learning-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  padding: 7px;
+  border-radius: 11px;
+  color: color-mix(in srgb, var(--tone) 86%, white 14%);
+  background: color-mix(in srgb, var(--tone) 18%, rgba(15, 23, 42, 0.9));
+  border: 1px solid color-mix(in srgb, var(--tone) 34%, rgba(148, 163, 184, 0.16));
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.learning-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.learning-copy {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.learning-copy strong,
+.learning-copy span {
+  overflow-wrap: anywhere;
+}
+
+.learning-copy strong {
+  color: #f8fafc;
+  font-size: 0.88rem;
+}
+
+.learning-copy span {
+  color: rgba(226, 232, 240, 0.64);
+  font-size: 0.76rem;
+  line-height: 1.35;
 }
 
 .chips {
@@ -1084,7 +1191,8 @@
   .metrics,
   .tech-grid,
   .project-grid,
-  .about-panel {
+  .about-panel,
+  .learning-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1104,6 +1212,10 @@
   .portrait-card {
     width: 100%;
     aspect-ratio: 0.92;
+  }
+
+  .learning-heading {
+    flex-direction: column;
   }
 }
 
