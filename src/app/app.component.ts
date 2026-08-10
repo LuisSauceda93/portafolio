@@ -102,9 +102,7 @@ export class AppComponent {
       title: 'Backend',
       items: [
         { name: 'Laravel', icon: 'images/stack-icons/laravel.svg', iconAlt: 'Laravel', tone: '#ff2d20' },
-        { name: 'PHP', icon: 'images/stack-icons/php.svg', iconAlt: 'PHP', tone: '#787cb5' },
-        { name: 'Spring Boot', icon: 'images/stack-icons/spring.svg', iconAlt: 'Spring Boot', tone: '#6db33f' },
-        { name: 'Node.js', icon: 'images/stack-icons/nodejs.svg', iconAlt: 'Node.js', tone: '#68a063' }
+        { name: 'PHP', icon: 'images/stack-icons/php.svg', iconAlt: 'PHP', tone: '#787cb5' }
       ]
     },
     {
@@ -124,20 +122,8 @@ export class AppComponent {
     {
       title: 'Infraestructura',
       items: [
-        { name: 'Docker', icon: 'images/stack-icons/docker.svg', iconAlt: 'Docker', tone: '#2496ed' },
-        {
-          name: 'AWS',
-          icon: 'images/stack-icons/amazonwebservices.svg',
-          iconAlt: 'Amazon Web Services',
-          tone: '#ff9900',
-          wordmark: true
-        },
-        {
-          name: 'GitHub Actions',
-          icon: 'images/stack-icons/githubactions.svg',
-          iconAlt: 'GitHub Actions',
-          tone: '#2088ff'
-        },
+        { name: 'Git', icon: 'images/stack-icons/git.svg', iconAlt: 'Git', tone: '#f05032' },
+        { name: 'GitHub', icon: 'images/stack-icons/github.svg', iconAlt: 'GitHub', tone: '#f0f6fc' },
         { name: 'Linux', icon: 'images/stack-icons/linux.svg', iconAlt: 'Linux', tone: '#f7b500' }
       ]
     }
