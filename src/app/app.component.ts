@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 type NavItem = {
   label: string;
@@ -47,6 +47,17 @@ type Project = {
   stack: string[];
   category: string;
   accent: string;
+  icon?: string;
+  iconLabel?: string;
+  iconWide?: boolean;
+  logos?: ProjectLogo[];
+};
+
+type ProjectLogo = {
+  name: string;
+  icon: string;
+  tone: string;
+  wide?: boolean;
 };
 
 type CareerItem = {
@@ -66,6 +77,12 @@ type CareerItem = {
 export class AppComponent {
   title = 'Luis Sauceda';
   isMobileMenuOpen = false;
+  projectStartIndex = 0;
+  visibleProjectCount = 3;
+
+  constructor() {
+    this.updateProjectPageSize();
+  }
 
   readonly navItems: NavItem[] = [
     { label: 'Inicio', href: '#inicio' },
@@ -164,37 +181,60 @@ export class AppComponent {
 
   readonly projects: Project[] = [
     {
-      title: 'GastoTrack',
+      title: 'Dido',
+      role: 'Mobile + Backend',
+      summary:
+        'Directorio de negocios y servicios locales que ofrecen servicio a domicilio en tu ciudad.',
+      impact:
+        'Permite descubrir productos, servicios, ubicación, teléfono, redes sociales, promociones y restricciones desde una aplicación publicada en Google Play y App Store. La operación se administra desde un portal web.',
+      stack: ['Ionic', 'PHP', 'MySQL', 'API REST', 'Portal web'],
+      category: 'Aplicación móvil',
+      accent: '#f59e0b',
+      icon: 'images/project-icons/dido.png',
+      iconLabel: 'Aplicación móvil · App Store y Google Play'
+    },
+    {
+      title: 'Enlace',
+      role: 'Full-Stack + Mobile',
+      summary:
+        'Aplicación interna y PWA de LAPISA para centralizar solicitudes, actividades, notificaciones y documentos.',
+      impact:
+        'Facilita la operación diaria y el intercambio controlado de documentos con clientes y proveedores autorizados. Disponible en Google Play y App Store.',
+      stack: ['Ionic', 'TypeScript', 'PHP', 'PostgreSQL', 'API REST', 'Epicor'],
+      category: 'Operación empresarial',
+      accent: '#06b6d4',
+      icon: 'images/project-icons/enlace.png',
+      iconLabel: 'Aplicación móvil y PWA · App Store y Google Play'
+    },
+    {
+      title: 'Nexhum',
       role: 'Full-Stack',
       summary:
-        'Sistema web para control de gastos, aprobaciones y reportes operativos.',
+        'Sistema integral de Capital Humano para gestionar nómina, capacitaciones, vacaciones, permisos, marcajes y organigrama.',
       impact:
-        'Centraliza el seguimiento financiero y reduce trabajo manual en procesos internos.',
-      stack: ['Angular', 'Laravel', 'PostgreSQL', 'Docker'],
-      category: 'Operación',
-      accent: '#4f8cff'
+        'Centraliza procesos de personal en un portal empresarial y facilita la administración de información clave para la operación de la empresa.',
+      stack: ['Angular 20', 'TypeScript', 'Angular Material', 'PostgreSQL', 'Laravel', 'API REST'],
+      category: 'Capital humano',
+      accent: '#0ea5e9',
+      icon: 'images/project-icons/nexhum.png',
+      iconLabel: 'Sistema integral de Capital Humano',
+      iconWide: true
     },
     {
-      title: 'Enlace PWA',
-      role: 'Mobile',
+      title: 'Integración Epicor + Salesforce',
+      role: 'Integraciones + Backend',
       summary:
-        'Aplicación PWA para gestión de documentos, encuestas y notificaciones internas.',
+        'Integración empresarial para conectar la información de Epicor con Salesforce y automatizar el registro de pagos bancarios.',
       impact:
-        'Mejora el acceso desde cualquier dispositivo y simplifica flujos para equipos en campo.',
-      stack: ['Ionic', 'Angular', 'TypeScript', 'Capacitor'],
-      category: 'Movilidad',
-      accent: '#8b5cf6'
-    },
-    {
-      title: 'Dashboard Analítico',
-      role: 'Data',
-      summary:
-        'Panel de análisis con indicadores de ventas, inventarios y nómina.',
-      impact:
-        'Acelera la toma de decisiones con visualizaciones y métricas accionables.',
-      stack: ['Python', 'Pandas', 'Power BI', 'SQL'],
-      category: 'Datos',
-      accent: '#10b981'
+        'Facilita a los representantes de ventas la consulta de disponibilidad de productos en Salesforce y reduce tiempos de captura y errores al extraer información de fichas de pago con apoyo de herramientas de IA e integrarla a Epicor.',
+      stack: ['Epicor', 'Salesforce', 'API REST', 'Automatización', 'IA aplicada'],
+      category: 'Empresarial',
+      accent: '#0f766e',
+      iconLabel: 'Epicor + Salesforce · Automatización con IA',
+      logos: [
+        { name: 'Epicor', icon: 'images/stack-icons/epicor.png', tone: '#0f6070', wide: true },
+        { name: 'Salesforce', icon: 'images/stack-icons/salesforce.svg', tone: '#00a1e0' }
+      ]
     }
   ];
 
@@ -232,6 +272,46 @@ export class AppComponent {
       points: ['Análisis', 'Construcción de funcionalidades', 'Pruebas']
     }
   ];
+
+  get visibleProjects(): Project[] {
+    const count = Math.min(this.visibleProjectCount, this.projects.length);
+
+    return Array.from({ length: count }, (_, offset) => {
+      return this.projects[(this.projectStartIndex + offset) % this.projects.length];
+    });
+  }
+
+  get projectCounterLabel(): string {
+    if (this.visibleProjectCount === 1) {
+      return `${this.projectStartIndex + 1} de ${this.projects.length} proyectos`;
+    }
+
+    return `${this.visibleProjectCount} de ${this.projects.length} proyectos`;
+  }
+
+  @HostListener('window:resize')
+  handleWindowResize(): void {
+    this.updateProjectPageSize();
+  }
+
+  showPreviousProjects(): void {
+    this.projectStartIndex =
+      (this.projectStartIndex - 1 + this.projects.length) % this.projects.length;
+  }
+
+  showNextProjects(): void {
+    this.projectStartIndex = (this.projectStartIndex + 1) % this.projects.length;
+  }
+
+  private updateProjectPageSize(): void {
+    const nextCount =
+      typeof window === 'undefined' ? 3 : window.innerWidth <= 760 ? 1 : window.innerWidth <= 1080 ? 2 : 3;
+
+    if (nextCount !== this.visibleProjectCount) {
+      this.visibleProjectCount = nextCount;
+      this.projectStartIndex = 0;
+    }
+  }
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

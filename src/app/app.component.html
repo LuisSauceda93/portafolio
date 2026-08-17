@@ -260,29 +260,53 @@
   <section id="proyectos" class="projects">
     <div class="section-heading">
       <p>Proyectos destacados</p>
-      <h2>Soluciones pensadas para operación, datos y automatización</h2>
+      <h2>Aplicaciones y sistemas construidos para resolver necesidades reales</h2>
     </div>
 
-    <div class="project-grid">
-      @for (project of projects; track project.title) {
+    <div class="project-grid project-grid--carousel">
+      @for (project of visibleProjects; track project.title) {
         <article class="project-card" [style.--accent]="project.accent">
           <div class="project-preview">
-            <div class="preview-shell">
-              <div class="preview-bar">
-                <span></span>
-                <span></span>
-                <span></span>
+            @if (project.icon) {
+              <div class="project-app-preview">
+                <div class="project-app-icon" [class.project-app-icon--wide]="project.iconWide">
+                  <img [src]="project.icon" [alt]="'Ícono de ' + project.title" loading="lazy">
+                </div>
+                <span class="project-app-label">{{ project.iconLabel || 'Proyecto destacado' }}</span>
               </div>
+            } @else if (project.logos) {
+              <div class="preview-shell preview-shell--integration">
+   
 
-              <div class="preview-body">
-                <div class="preview-kicker">{{ project.category }}</div>
-                <div class="preview-grid">
-                  <div class="preview-panel preview-panel-large"></div>
-                  <div class="preview-panel preview-panel-small"></div>
-                  <div class="preview-panel preview-panel-wide"></div>
+                <div class="preview-body">
+                  
+                  <div class="project-logo-preview-row">
+                    @for (logo of project.logos; track logo.name) {
+                      <span
+                        class="project-logo-preview"
+                        [class.project-logo-preview--wide]="logo.wide"
+                        [style.--tone]="logo.tone"
+                      >
+                        <img [src]="logo.icon" [alt]="logo.name" loading="lazy">
+                      </span>
+                    }
+                  </div>
+                  <span class="project-app-label">{{ project.iconLabel || 'Proyecto destacado' }}</span>
                 </div>
               </div>
-            </div>
+            } @else {
+              <div class="preview-shell">
+          
+                <div class="preview-body">
+                  <div class="preview-kicker">{{ project.category }}</div>
+                  <div class="preview-grid">
+                    <div class="preview-panel preview-panel-large"></div>
+                    <div class="preview-panel preview-panel-small"></div>
+                    <div class="preview-panel preview-panel-wide"></div>
+                  </div>
+                </div>
+              </div>
+            }
           </div>
 
           <div class="project-content">
@@ -303,6 +327,16 @@
           </div>
         </article>
       }
+    </div>
+
+    <div class="projects-carousel-controls" aria-label="Navegación de proyectos">
+      <button class="carousel-control" type="button" (click)="showPreviousProjects()" aria-label="Proyectos anteriores">
+        ←
+      </button>
+      <span aria-live="polite">{{ projectCounterLabel }}</span>
+      <button class="carousel-control" type="button" (click)="showNextProjects()" aria-label="Proyectos siguientes">
+        →
+      </button>
     </div>
 
     <div class="projects-footer">
